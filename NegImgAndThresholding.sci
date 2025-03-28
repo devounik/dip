@@ -2,39 +2,36 @@
 clc;
 clear;
 
-// LOAD THE IMAGE
-i = imread("C:\Users\SUMEET\OneDrive\Pictures\worldmapwallpaper.jpg");
-
-// CONVERT TO DOUBLE FOR PROCESSING
+i = imread('C:\Users\SUMEET\OneDrive\Pictures\worldmapwallpaper.jpg');
 i_double = double(i);
 
-// OBTAIN NEGATIVE OF THE IMAGE
+// OBTAIN THE NEGATIVE OF THE IMAGE
 negative_img = 255 - i_double;
 
 // APPLY THRESHOLDING
-T = input("Enter Threshold Value (0-255): ");
-thresholded_img = i_double;
-
+T = input("Enter Thresholded Value (0-255): ");
 [row, column] = size(i_double);
-for i = 1:row do
-    for j = 1:column do
-        if thresholded_img(i, j) < T then
-            thresholded_img(i, j) = 0;
-        else 
-            thresholded_img(i, j) = 255;
+thresholded_img = zeros(row, column);
+
+for m = 1:row
+    for n = 1:column
+        if (i_double(m, n) < T)
+            thresholded_img(m, n) = 0;
+        else
+            thresholded_img(m, n) = 255;
         end
     end
 end
 
 // DISPLAY THE IMAGES
 figure(1);
-imshow(uint8(i))
-title("Original Image")
+imshow(uint8(i_double));
+title("Original Image");
 
 figure(2);
-imshow(uint8(negative_img))
-title("Negative Image")
+imshow(uint8(negative_img));
+title("Negative Image");
 
 figure(3);
-imshow(uint8(thresholded_img))
-title("Thresholded Image")
+imshow(uint8(thresholded_img));
+title("Thresholded Image");
